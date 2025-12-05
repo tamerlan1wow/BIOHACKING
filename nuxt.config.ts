@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     '@sidebase/nuxt-auth',
     '@pinia/nuxt',
     'pinia-plugin-persistedstate',
-    '@prisma/nuxt',
+    
   ],
   auth: {
     globalAppMiddleware: true
