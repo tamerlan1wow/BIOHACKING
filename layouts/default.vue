@@ -1,61 +1,77 @@
 <template>
-  <header class="flex flex-row w-full items-center justify-between bg-[#FB3640] border-b-2 border-black-400 text-xl text-black relative max-sm:justify-between">
+  <header class="fixed top-0 left-0 w-full z-30 flex items-center justify-between bg-[#121212] border-y-[7px] border-[#4CAF50] text-xl text-white h-[100px] px-4">
     
-   
-    <div class="px-4 py-2 flex items-center">
-      <img src="/public/images/circle.png" alt="Logo" class="w-16 h-16 bg-transparent">
+    <div class="flex items-center w-1/3">
+      <img src="/public/images/TAMERLAN-DARKHAN-06-12-2025.png" alt="Logo" class="w-80 h-50 bg-transparent max-sm:w-40 max-sm:h-8">
     </div>
 
-   
-    <nav :class="{
-      'flex flex-row items-center justify-end gap-4 basis-2/3': !burger || burger,
-      'max-sm:absolute max-sm:top-full max-sm:left-0 max-sm:w-full max-sm:flex-col max-sm:gap-0 max-sm:bg-white max-sm:px-0': burger,
-      'max-sm:hidden': !burger
-    }">
-      <NuxtLink to="/" class="links max-sm:w-full max-sm:text-center">Home</NuxtLink>
-      <NuxtLink to="/protected" class="links max-sm:w-full max-sm:text-center">Protected</NuxtLink>
-      
+    <div @click="switch_burger" class="sm:hidden flex flex-col justify-between w-8 h-6 cursor-pointer z-40">
+      <span class="h-[3px] w-full bg-white transition-all duration-150" :class="burger ? 'rotate-45 translate-y-[9px]' : ''"></span>
+      <span class="h-[3px] w-full bg-white transition-all duration-150" :class="burger ? 'opacity-0' : ''"></span>
+      <span class="h-[3px] w-full bg-white transition-all duration-150" :class="burger ? '-rotate-45 -translate-y-[9px]' : ''"></span>
+    </div>
+
+    <nav class="hidden sm:flex justify-center items-center gap-0 w-1/3">
+      <NuxtLink to="/" class="group bg-[#121212] min-w-[70px] h-[60px] text-white font-bold
+    flex flex-row items-center justify-center hover:text-black hover:bg-[#4CAF50] active:bg-[#2E7D32] transition-colors duration-150">Home</NuxtLink>
       
       <div class="relative">
-        <button @click="toggleLabs" class="links max-sm:w-full max-sm:text-center">
-          Labs
-        </button>
-        <div v-if="labsOpen" class="flex flex-col absolute top-full bg-white text-black w-56 text-center max-sm:relative max-sm:w-full max-sm:bg-red-100">
-          <NuxtLink to="/Lab3" class="p-2 border-b-2 border-black hover:bg-[#22577A] hover:text-yellow-300">Lab3</NuxtLink>
-          <NuxtLink to="/Lab4" class="p-2 border-b-2 border-black hover:bg-[#22577A] hover:text-yellow-300">Lab4</NuxtLink>
-          <NuxtLink to="/Lab5" class="p-2 border-b-2 border-black hover:bg-[#22577A] hover:text-yellow-300">Lab5</NuxtLink>
-          <NuxtLink to="/Lab6" class="p-2 border-b-2 border-black hover:bg-[#22577A] hover:text-yellow-300">Lab6</NuxtLink>
+        <button @click="toggleLabs" class="group bg-[#121212] min-w-[70px] h-[60px] text-white font-bold
+    flex flex-row items-center justify-center hover:text-black hover:bg-[#4CAF50] active:bg-[#2E7D32] transition-colors duration-150">Topics</button>
+        <div v-if="labsOpen" class="absolute top-full mt-1 left-0 flex flex-col bg-[#1c1c1c] text-white w-56 text-center shadow-lg z-10">
+          <NuxtLink to="/Lab4" class="group bg-[#121212] min-w-[60px] h-[60px] text-white font-bold
+    flex flex-row items-center justify-center hover:text-black hover:bg-[#4CAF50] transition-colors duration-150">Nutrition</NuxtLink>
+          <NuxtLink to="/Lab5" class="group bg-[#121212] min-w-[60px] h-[60px] text-white font-bold
+    flex flex-row items-center justify-center hover:text-black hover:bg-[#4CAF50] transition-colors duration-150">Sleep</NuxtLink>
+          <NuxtLink to="/Lab6" class="group bg-[#121212] min-w-[60px] h-[60px] text-white font-bold
+    flex flex-row items-center justify-center hover:text-black hover:bg-[#4CAF50] transition-colors duration-150">Exercise</NuxtLink>
+          <NuxtLink to="/SportsCards" class="group bg-[#121212] min-w-[60px] h-[60px] text-white font-bold
+    flex flex-row items-center justify-center hover:text-black hover:bg-[#4CAF50] transition-colors duration-150">Supplements</NuxtLink>
         </div>
       </div>
-
-      <NuxtLink to="/login" class="links max-sm:w-full max-sm:text-center">LogIn</NuxtLink>
-      <div class="links max-sm:w-full max-sm:text-center" @click="signOut()">LogOut</div>
-      <img :src="data?.user?.image" v-show="log_check" class="w-14 h-14 border-2 border-black rounded-full max-sm:mx-auto" />
+      <NuxtLink to="/Lab3" class="group bg-[#121212] min-w-[70px] h-[60px] text-white font-bold
+    flex flex-row items-center justify-center hover:text-black hover:bg-[#4CAF50] active:bg-[#2E7D32] transition-colors duration-150">BIOAPP</NuxtLink>
     </nav>
 
-    
-    <div @click="switch_burger" class="max-sm:flex max-sm:flex-col max-sm:mr-4 max-sm:justify-between max-sm:items-center max-sm:w-8 max-sm:h-6 hidden sm:hidden">
-      <span class="h-[3px] w-full bg-blue-950" :class="burger ? 'rotate-45 relative top-[9px]' : ''"></span>
-      <span class="h-[3px] w-full bg-blue-950" :class="burger ? 'opacity-0' : ''"></span>
-      <span class="h-[3px] w-full bg-blue-950" :class="burger ? 'rotate-[-45deg] relative bottom-3' : ''"></span>
+    <div class="hidden sm:flex items-center justify-end gap-4 w-1/3">
+      <!-- Убрали Protected / LogIn / LogOut -->
+    </div>
+
+    <div
+      v-if="burger"
+      class="sm:hidden fixed inset-0 bg-[#1c1c1c] z-20 flex flex-col justify-center items-center gap-4 text-center text-xl"
+    >
+      <NuxtLink to="/" class="links w-full text-white">Home</NuxtLink>
+
+      <div class="w-full flex flex-col items-center">
+        <button @click="toggleLabs" class="group bg-[#121212] min-w-[60px] h-[60px] text-white font-bold
+    flex flex-row items-center justify-center hover:text-black hover:bg-[#4CAF50] transition-colors duration-150 w-56">Topics</button>
+        <div v-if="labsOpen" class="flex flex-col mt-2 bg-[#1c1c1c] w-full max-w-56">
+          <NuxtLink to="/Lab4" class="group bg-[#121212] min-w-[60px] h-[60px] text-white font-bold
+    flex flex-row items-center justify-center hover:text-black hover:bg-[#4CAF50] transition-colors duration-150">Nutrition</NuxtLink>
+          <NuxtLink to="/Lab5" class="group bg-[#121212] min-w-[60px] h-[60px] text-white font-bold
+    flex flex-row items-center justify-center hover:text-black hover:bg-[#4CAF50] transition-colors duration-150">Sleep</NuxtLink>
+          <NuxtLink to="/Lab6" class="group bg-[#121212] min-w-[60px] h-[60px] text-white font-bold
+    flex flex-row items-center justify-center hover:text-black hover:bg-[#4CAF50] transition-colors duration-150">Exercise</NuxtLink>
+          <NuxtLink to="/SportsCards" class="group bg-[#121212] min-w-[60px] h-[60px] text-white font-bold
+    flex flex-row items-center justify-center hover:text-black hover:bg-[#4CAF50] transition-colors duration-150">Supplements</NuxtLink>
+        </div>
+      </div>
+      <NuxtLink to="/Lab3" class="group bg-[#121212] min-w-[60px] h-[60px] text-white font-bold
+    flex flex-row items-center justify-center hover:text-black hover:bg-[#4CAF50] active:bg-[#2E7D32] transition-colors duration-150">BIOAPP</NuxtLink>
     </div>
   </header>
 
-  <main class="min-h-screen p-5 bg-[#F8F7F2] text-black flex">
-    <div class="m-auto w-full">
+  <main class="pt-[80px] min-h-screen w-full bg-[#0F1114] text-white flex-1 flex">
+    <div class="w-full">
       <slot />
     </div>
   </main>
-
-  <footer class="flex flex-row w-full bg-[#FB3640] border-t-2 border-gray-400 items-center justify-center px-4 py-2 gap-4">
-    <a href="https://t.me/tamerverse"><img src="/images/Telegram_logo.svg.webp" class="w-16 h-16" /></a>
-    <a href="https://github.com/"><img src="/images/github.png" class="w-16 h-16" /></a>
-    <a href="https://www.facebook.com"><img src="/images/Facebook.png" class="w-16 h-16 bg-transparent" /></a>
-  </footer>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, watch } from 'vue'
+
 const burger = ref<boolean>(false)
 const labsOpen = ref<boolean>(false)
 
@@ -67,33 +83,23 @@ const toggleLabs = () => {
   labsOpen.value = !labsOpen.value
 }
 
-
-const { signOut, status } = useAuth()
-const log_check = computed(() => status.value === 'authenticated')
-const { data } = await useFetch('/api/me')
-
-
-useHead({
-  script: [
-    {
-      src: "https://www.googletagmanager.com/gtag/js?id=G-YM1HZ1JLP4",
-      async: true
-    },
-    {
-      innerHTML: `
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-YM1HZ1JLP4');
-      `,
-      type: "text/javascript"
-    }
-  ]
+watch(burger, (val) => {
+  document.body.style.overflow = val ? 'hidden' : 'auto'
 })
 </script>
 
 <style scoped>
 .links {
-  @apply p-2 rounded-md hover:bg-[#22577A] hover:text-yellow-300;
+  @apply p-2 rounded-md hover:bg-[#4CAF50] hover:text-black;
+}
+</style>
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #0F1114;
+  color: white;
 }
 </style>
