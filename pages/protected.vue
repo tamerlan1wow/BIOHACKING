@@ -12,10 +12,14 @@
 </template>
 
 <script setup lang="ts">
-
-definePageMeta({middleware:'sidebase-auth'})
-
+definePageMeta({
+  auth: {
+    authenticatedOnly: true,
+    navigateUnauthenticatedTo: '/login',
+  },
+})
 </script>
+
 <style scoped>
 main {
   animation: fadeIn 1.5s ease-out;
