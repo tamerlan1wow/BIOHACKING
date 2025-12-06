@@ -4,16 +4,8 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxtjs/tailwindcss',
-    '@sidebase/nuxt-auth',
-    '@pinia/nuxt',
-    'pinia-plugin-persistedstate',
   ],
-
-  auth: {
-    globalAppMiddleware: true,
-    baseURL: "/api/auth",
-  },
-
+  
   runtimeConfig: {
     public: {
       GITHUB_ID: process.env.GITHUB_ID,
