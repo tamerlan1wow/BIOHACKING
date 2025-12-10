@@ -1,7 +1,7 @@
 <template>
   <main class="min-h-screen bg-white">
     <!-- Фон -->
-    <div class="fixed inset-0 pointer-events-none overflow-hidden">
+    <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
       <div class="absolute inset-0 bg-gradient-to-b from-white via-emerald-50/20 to-white"></div>
       <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-100/30 rounded-full blur-3xl"></div>
       <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-teal-100/20 rounded-full blur-3xl"></div>
@@ -56,19 +56,19 @@
             </p>
 
             <ul class="space-y-3">
-              <li class="flex items-center">
+              <li class="flex items-center tuxt">
                 <span class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></span>
                 Quantified Self movement & biometric awareness
               </li>
-              <li class="flex items-center">
+              <li class="flex items-center tuxt">
                 <span class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></span>
                 Cold exposure & thermal regulation practices
               </li>
-              <li class="flex items-center">
+              <li class="flex items-center tuxt">
                 <span class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></span>
                 Smart supplementation & cognitive optimization
               </li>
-              <li class="flex items-center">
+              <li class="flex items-center tuxt">
                 <span class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></span>
                 Wearable integration for real-time feedback
               </li>
@@ -123,6 +123,12 @@ main {
 ::-webkit-scrollbar-thumb {
   background: #10b981;
   border-radius: 3px;
+}
+
+.tuxt {
+  color: #1f2937;
+  position: relative;
+  z-index: 10;
 }
 
 ::-webkit-scrollbar-thumb:hover {
